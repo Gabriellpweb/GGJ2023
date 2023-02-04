@@ -23,9 +23,8 @@ public class TurretVisualAnimation : MonoBehaviour
             Debug.LogError("No tower controler assigned.");
         }
         towerController.OnDie += TriggerDieAnimation;
+        towerController.OnAttack += TriggerAttackAnimation;
     }
-
-
 
     public void TriggerAttackAnimation(object sender, System.EventArgs e)
     {

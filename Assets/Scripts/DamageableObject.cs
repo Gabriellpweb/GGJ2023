@@ -48,7 +48,7 @@ public class DamageableObject : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
+        //Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
         if (Time.time - lastAttackTime > attackRate) {
             lastAttackTime = Time.time;
             DamageableObject damageableComp = target.GetComponent<DamageableObject>();
