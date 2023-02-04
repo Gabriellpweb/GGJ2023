@@ -16,12 +16,15 @@ public class Timer : MonoBehaviour
     private int coins = 0;
     private float lastTimeCurrencyGained = 0;
     public float minute;
-
+    private void Awake()
+    {
+        minute = remainingTime / 60;
+    }
     private void Start()
     {
         secsWithDiffColor = new int[] { 0, 1, 59, 58, 2 };
         text = GetComponent<TextMeshProUGUI>();
-        minute = remainingTime / 60;
+        
     }
 
     // Update is called once per frame
