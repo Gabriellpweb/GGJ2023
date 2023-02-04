@@ -9,7 +9,6 @@ public class EnemyCounter : MonoBehaviour
     public int frequency;
     private string defaultText = "Enemies ";
     private TextMeshProUGUI text;
-    [SerializeField] public int coins;
 
     private void Start()
     {

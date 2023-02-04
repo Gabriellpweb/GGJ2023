@@ -38,10 +38,11 @@ public class DamageableObject : MonoBehaviour
     {
        
         if (target == null) { //there is no target, nothing to do here
-            //Debug.Log("Attack method target NULL");
+            Debug.Log("Attack method target NULL");
             return;
         }
-       
+
+        Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
         if (Time.time - lastAttackTime > attackRate) {
             lastAttackTime = Time.time;
             DamageableObject damageableComp = target.GetComponent<DamageableObject>();

@@ -41,15 +41,9 @@ public class EnemyObject : DamageableObject
         }
 
         target = other.gameObject;
-        
-
-       // Destroy(collidedGameObject); //test
-   
-
     }
 
     
-    //[SerializeField] private Transform movePositionTransform;
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
