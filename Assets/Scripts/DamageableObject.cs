@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class DamageableObject : MonoBehaviour
 {
-    int lifePoints = 10;
+    public int lifePoints = 10;
     float lastAttackTime;
     float updateInterval = 0.5F;
     int attackRate = 1;
 
     protected GameObject target;
+
     public enum DamageableObjectTypes
     {
         Enemy,
         Player
     }
+
     public DamageableObjectTypes type;
 
     public static string getPlayerTag()
