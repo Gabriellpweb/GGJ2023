@@ -8,8 +8,11 @@ public class EnemyObject : DamageableObject
 
     NavMeshAgent navMeshAgent;
     GameObject currentTarget;
+    Wallet wallet;
+    int enemyDefaultReward = 1;
 
-  
+
+
 
     private bool isPlayer(GameObject collidedGameObject)
     {
@@ -50,6 +53,7 @@ public class EnemyObject : DamageableObject
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        
     }
 
 
@@ -89,9 +93,15 @@ public class EnemyObject : DamageableObject
         }
     }
 
+    void OnDestroy()
+    {
+        wallet.AddCoin(enemyDefaultReward);
+    }
+
     private void Start()
     {
         FindClosestPlayer();
+        wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }
 
     private void Update()
