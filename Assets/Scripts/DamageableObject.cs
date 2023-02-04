@@ -6,7 +6,7 @@ public class DamageableObject : MonoBehaviour
 {
 
     public int lifePoints = 2;
-    public int attackRate = 1;
+    public float attackRate = 1;
     public int attackPower = 1;
     float lastAttackTime;
 
@@ -56,5 +56,10 @@ public class DamageableObject : MonoBehaviour
         }
 
         return true;
+    }
+
+    void Update()
+    {
+        IsItAlive();
     }
 }

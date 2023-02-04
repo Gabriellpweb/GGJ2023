@@ -12,8 +12,8 @@ public class Tower : DamageableObject
     }
 
     [Header("Info")] 
-    private List<Enemy> enemiesInRange = new List<Enemy>();
-    private Enemy curEnemy;
+    private List<EnemyObject> enemiesInRange = new List<EnemyObject>();
+    private EnemyObject curEnemy;
 
     public TargetPriority targetPriority;
     public bool rotateTowardsTarget;
@@ -36,12 +36,12 @@ public class Tower : DamageableObject
             lastAttackTime = Time.time;
             curEnemy = GetEnemy();
 
-            if (curEnemy != null)
-                Attack();
+            if (curEnemy != null && curEnemy.IsItAlive())
+                TowerAttack();
         }
     }
 
-    Enemy GetEnemy()
+    EnemyObject GetEnemy()
     {
         enemiesInRange.RemoveAll(x => x == null);
 
@@ -59,7 +59,7 @@ public class Tower : DamageableObject
                 }
             case TargetPriority.Close:
                 {
-                    Enemy closest = null;
+                    EnemyObject closest = null;
                     float dist = 100;
 
                     for (int x = 0; x < enemiesInRange.Count; x++)
@@ -77,10 +77,10 @@ public class Tower : DamageableObject
                 }
             case TargetPriority.Strong:
                 {
-                    Enemy strongest = null;
+                    EnemyObject strongest = null;
                     int strongestHealth = 0;
 
-                    foreach (Enemy enemy in enemiesInRange)
+                    foreach (EnemyObject enemy in enemiesInRange)
                     {
                         if (enemy.lifePoints > strongestHealth)
                         {
@@ -97,7 +97,7 @@ public class Tower : DamageableObject
     }
 
     // attacks the curEnemy
-    void Attack()
+    void TowerAttack()
     {
         if (rotateTowardsTarget)
         {
@@ -113,7 +113,7 @@ public class Tower : DamageableObject
     {
         if (other.CompareTag("Enemy"))
         {
-            enemiesInRange.Add(other.GetComponent<Enemy>());
+            enemiesInRange.Add(other.GetComponent<EnemyObject>());
         }
     }
 
@@ -121,7 +121,7 @@ public class Tower : DamageableObject
     {
         if (other.CompareTag("Enemy"))
         {
-            enemiesInRange.Remove(other.GetComponent<Enemy>());
+            enemiesInRange.Remove(other.GetComponent<EnemyObject>());
         }
     }
 }
