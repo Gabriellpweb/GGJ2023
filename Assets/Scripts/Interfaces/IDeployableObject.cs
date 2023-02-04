@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDeployableObject
 {
-    public void Deploy();
+    public void Deploy(IDeployableObjectHoster hosterObject);
 }

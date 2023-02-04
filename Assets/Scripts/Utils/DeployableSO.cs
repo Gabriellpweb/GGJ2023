@@ -6,6 +6,7 @@ using UnityEngine;
 public class DeployableSO : ScriptableObject
 {
     public GameObject deployableObject;
+    public string deployableLabel;
     public Sprite objectIcon;
     public int cost;
 }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deployableObject: {fileID: 4677310452669538973, guid: 8b923e41f64d40d49997e97acec00e57,
     type: 3}
+  deployableLabel: Energy Turret
   objectIcon: {fileID: 21300000, guid: a699391a01128014b830ef8dd55e8fb0, type: 3}
   cost: 20

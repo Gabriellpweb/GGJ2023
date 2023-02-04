@@ -7,5 +7,6 @@ using UnityEngine.UI;
 public class DeployableItem : MonoBehaviour
 {
     public Image thumb;
-    public TextMeshPro text;
+    public TextMeshProUGUI textMesh;
+    public Button button;
 }

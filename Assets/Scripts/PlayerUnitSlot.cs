@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerUnitSlot : MonoBehaviour, ISelectableObject
+public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjectHoster
 {
     [SerializeField] private Transform placementPoint;
     [SerializeField] private GameObject visualObjectToOutline;
@@ -10,11 +10,31 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject
 
     private GameObject hostedUnit;
 
+    private PlayerSlotsManager slotManagerRef;
+
     public bool IsAvailable()
     {
         return hostedUnit == null;
     }
 
+    public void SubscribeManager(PlayerSlotsManager slotManager)
+    {
+        slotManagerRef = slotManager;
+    }
+
+    public void DeployUnit(GameObject deployableUnit)
+    {
+        Debug.Log("Trying to deploy");
+        if (deployableUnit.TryGetComponent(out IDeployableObject deployable))
+        {
+            Debug.Log("Trying to instantiate");
+            hostedUnit = Instantiate(deployableUnit, placementPoint.position, Quaternion.identity);
+
+            deployable.Deploy(this);
+        }
+    }
+
+    #region Section and Hover Highligh
     public void Highlight()
     {
         if (!IsAvailable())
@@ -33,6 +53,14 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject
         }
         CanHighlight();
         visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.selectedOutlineLayerName);
+
+        if (slotManagerRef == null)
+        {
+            Debug.LogError("Slot not subscribed by Slot Manager");
+            return;
+        }
+
+        slotManagerRef.OpenDeploymentPanel(this);
     }
 
 
@@ -54,4 +82,5 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject
             Debug.LogError("No Outline Assigned");
         }
     }
+    #endregion
 }

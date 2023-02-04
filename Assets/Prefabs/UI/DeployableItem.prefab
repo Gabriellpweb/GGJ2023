@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 5683330581341446025}
   - component: {fileID: 5683330581341446038}
   - component: {fileID: 5683330581341446036}
+  - component: {fileID: 8805304131592064975}
   m_Layer: 5
   m_Name: DeployableItem
   m_TagString: Untagged
@@ -373,6 +374,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8805304131592064975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683330581341446031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955c75cc08d5bc34f9b8e001ef8b6c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thumb: {fileID: 5683330581670403490}
+  textMesh: {fileID: 5683330580960838141}
+  button: {fileID: 5683330581341446036}
 --- !u!1 &5683330581670403488
 GameObject:
   m_ObjectHideFlags: 0

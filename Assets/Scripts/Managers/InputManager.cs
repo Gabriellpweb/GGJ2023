@@ -47,14 +47,18 @@ public class InputManager : SingletonBehaviour<InputManager>
                 // On mouse hover selectableObj
                 else
                 {
-                    if (selectableObj != hoverObject && selectableObj != selectedObject)
+                    // Hover
+                    if (!Input.GetMouseButtonDown(0))
                     {
-                        if (hoverObject != null && hoverObject != selectedObject)
+                        if (selectableObj != hoverObject && selectableObj != selectedObject)
                         {
-                            hoverObject.NoOutline();
+                            if (hoverObject != null && hoverObject != selectedObject)
+                            {
+                                hoverObject.NoOutline();
+                            }
+                            hoverObject = selectableObj;
+                            hoverObject.Highlight();
                         }
-                        hoverObject = selectableObj;
-                        hoverObject.Highlight();
                     }
                 }
             }
