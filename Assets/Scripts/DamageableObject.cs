@@ -37,6 +37,7 @@ public class DamageableObject : MonoBehaviour
     public void TakeDamage(int damage)
     {
         this.lifePoints -= damage;
+        IsItAlive();
     }
 
     protected void Attack()
@@ -61,16 +62,11 @@ public class DamageableObject : MonoBehaviour
     {
         if (lifePoints <= 0)
         {
-            Destroy(gameObject);
             OnDie?.Invoke(this, EventArgs.Empty);
+            Destroy(gameObject, 1f);
             return false;
         }
 
         return true;
-    }
-
-    void Update()
-    {
-        IsItAlive();
     }
 }

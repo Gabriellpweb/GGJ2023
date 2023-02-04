@@ -124,7 +124,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: a50126ea77e4ced4ca8f39729c81e80e, type: 2}
 --- !u!1 &65181408
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 27.7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -556,8 +556,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.005912407, y: -0.94626886, z: 0.32286355, w: 0.01730621}
-  m_LocalPosition: {x: -0.061045196, y: 25.432863, z: 49.85302}
+  m_LocalRotation: {x: -0.0019971684, y: -0.8916455, z: 0.4527118, w: -0.004060789}
+  m_LocalPosition: {x: 0.5526576, y: 38.934036, z: 44.820538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -886,7 +886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628886295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.68, y: 13.24, z: 2.38}
+  m_LocalPosition: {x: -2.97, y: 16.51, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -923,11 +923,11 @@ Light:
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
-  m_Shape: 0
+  m_Shape: 2
   m_Color: {r: 0.38731253, g: 1, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
-  m_SpotAngle: 30
+  m_SpotAngle: 31.28
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -1148,7 +1148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842976462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.91, y: 9.78, z: 1.14}
+  m_LocalPosition: {x: 0.44, y: 3.37, z: 1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

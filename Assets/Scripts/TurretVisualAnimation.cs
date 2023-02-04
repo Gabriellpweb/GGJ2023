@@ -5,32 +5,35 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class TurretVisualAnimation : MonoBehaviour
 {
-    private const string IDLE_TRIGER = "Idle";
-    private const string ATTACK_TRIGER = "Attack";
-    private const string DIE_TRIGER = "Die";
+    public const string IDLE_TRIGER = "Idle";
+    public const string ATTACK_TRIGER = "Attack";
+    public const string DIE_TRIGER = "Die";
 
     [SerializeField] private Animator animator;
-
+    [SerializeField] private Tower towerController;
 
     void Start()
     {
         if (animator == null)
-        {
-            
+        {   
             Debug.LogError("No animator assigned.");
         }
+        if (towerController == null)
+        {
+            Debug.LogError("No tower controler assigned.");
+        }
+        towerController.OnDie += TriggerDieAnimation;
     }
 
 
-    void Update()
+
+    public void TriggerAttackAnimation(object sender, System.EventArgs e)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger(ATTACK_TRIGER);
-        } 
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetTrigger(DIE_TRIGER);
-        }
+        animator.SetTrigger(ATTACK_TRIGER);
+    }
+
+    public void TriggerDieAnimation(object sender, System.EventArgs e)
+    {
+        animator.SetTrigger(DIE_TRIGER);
     }
 }

@@ -12,8 +12,6 @@ public class EnemyObject : DamageableObject
     int enemyDefaultReward = 1;
 
 
-
-
     private bool isPlayer(GameObject collidedGameObject)
     {
         if (collidedGameObject == null)

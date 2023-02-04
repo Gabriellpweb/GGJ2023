@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDeployableObjectHoster
 {
-    public void UnsubscribeHostedObject(IDeployableObject deployableObj);
+    public void UnsubscribeHostedObject(object sender, System.EventArgs e);
 }

@@ -22,7 +22,7 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
         slotManagerRef = slotManager;
     }
 
-    public void DeployUnit(GameObject deployableUnit)
+    public void DeployUnit(GameObject deployableUnit, int cost)
     {
         if (!IsAvailable())
         {
@@ -32,16 +32,23 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
         
         if (deployableUnit.TryGetComponent(out IDeployableObject deployable))
         {
-            Debug.Log("Trying to instantiate");
+            if (!slotManagerRef.PurchaseDeployment(cost))
+            {
+                Debug.LogError("Not enought points.");
+                // TODO: Toast message?
+                return;
+            }
+            
             hostedUnit = Instantiate(deployableUnit, placementPoint.position, Quaternion.identity);
 
             deployable.Deploy(this);
         }
     }
 
-    public void UnsubscribeHostedObject(IDeployableObject deployableObj)
+    public void UnsubscribeHostedObject(object sender, System.EventArgs e)
     {
         hostedUnit = null;
+        Debug.Log("Deployable unsubscribed from host");
     }
 
     #region Section and Hover Highligh

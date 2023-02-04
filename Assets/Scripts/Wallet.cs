@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Wallet : MonoBehaviour
+public class Wallet : SingletonBehaviour<Wallet>
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] public int coins;
@@ -13,7 +13,6 @@ public class Wallet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
         coins = 100;
     }
 
@@ -24,7 +23,7 @@ public class Wallet : MonoBehaviour
 
     public bool spendCoins(int cost)
     {
-        if (coins < cost)
+        if (coins > cost)
         {
             coins -= cost;
             return true;
@@ -41,6 +40,9 @@ public class Wallet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = defaultCoinText + getCoins();
+        if (text != null)
+        {
+            text.text = defaultCoinText + getCoins();
+        }
     }
 }

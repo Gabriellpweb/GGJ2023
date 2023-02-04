@@ -8,7 +8,11 @@ public class PlayerSlotsManager : SingletonBehaviour<PlayerSlotsManager>
 
     [SerializeField] private DeploymentPanelController deploymentController;
 
+    private Wallet wallet;
+
     private PlayerUnitSlot[] playerSlots;
+
+    
 
     void Start()
     {
@@ -17,6 +21,8 @@ public class PlayerSlotsManager : SingletonBehaviour<PlayerSlotsManager>
         {
             playerSlot.SubscribeManager(this);
         }
+
+        wallet = gameObject.AddComponent<Wallet>();
     }
 
     public DeployableSO[] GetDeployables()
@@ -29,5 +35,10 @@ public class PlayerSlotsManager : SingletonBehaviour<PlayerSlotsManager>
         deploymentController.gameObject.SetActive(true);
         deploymentController.SetDeployables(deployables.ToArray());
         deploymentController.Open(slot);
+    }
+
+    public bool PurchaseDeployment(int amount)
+    {
+        return wallet.spendCoins(amount);
     }
 }

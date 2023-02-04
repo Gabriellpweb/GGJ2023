@@ -63,7 +63,7 @@ public class DeploymentPanelController : MonoBehaviour
     public void DeployUnit(DeployableSO deployableSO)
     {
         Debug.Log($"Deploy {deployableSO.deployableLabel}");
-        selectedSlot.DeployUnit(deployableSO.deployableObject);
+        selectedSlot.DeployUnit(deployableSO.deployableObject, deployableSO.cost);
         Close();
     }
 

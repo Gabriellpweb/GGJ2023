@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : DamageableObject, IDeployableObject
@@ -27,11 +28,16 @@ public class Tower : DamageableObject, IDeployableObject
     [Header("Projectile")]
     public float projectileSpeed;
 
-    private IDeployableObjectHoster hoster;
 
-    private void Awake()
+    void Start()
     {
-        
+        StartCoroutine(SelfKill());
+    }
+
+    IEnumerator SelfKill()
+    {
+        yield return new WaitForSeconds(1f);
+        TakeDamage(3);
     }
 
     // Update is called once per frame
@@ -141,13 +147,9 @@ public class Tower : DamageableObject, IDeployableObject
         }
     }
 
-    private void Die(EventArgs e)
-    {
-        hoster.UnsubscribeHostedObject(this);
-    }
 
     public void Deploy(IDeployableObjectHoster hosterObject)
     {
-        hoster = hosterObject;
+        OnDie += hosterObject.UnsubscribeHostedObject;
     }
 }

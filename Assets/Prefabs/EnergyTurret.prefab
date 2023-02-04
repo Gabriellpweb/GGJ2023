@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4677310452669538974}
   m_Layer: 0
   m_Name: EnergyTurret
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,10 +82,10 @@ MonoBehaviour:
   type: 1
   targetPriority: 1
   rotateTowardsTarget: 1
+  attackRange: 0
   projectilePrefab: {fileID: 8223029907174675417, guid: e92c632d364c7fe4d8ddebaf3614f298,
     type: 3}
   projectileSpawnPos: {fileID: 3079957385510380488}
-  projectileDamage: 1
   projectileSpeed: 10
 --- !u!1001 &4677310451877321393
 PrefabInstance:
@@ -94,6 +94,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4677310452669538969}
     m_Modifications:
+    - target: {fileID: 7916668996293065835, guid: 53bd7765778db514597ddced51d33b4d,
+        type: 3}
+      propertyPath: towerController
+      value: 
+      objectReference: {fileID: 4677310452669538974}
     - target: {fileID: 7916668996815792060, guid: 53bd7765778db514597ddced51d33b4d,
         type: 3}
       propertyPath: m_Name
