@@ -7,6 +7,8 @@ public class Wallet : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] public int coins;
+    [SerializeField] static  public int TowerCost = 25;
+
     string defaultCoinText = "Coins: ";
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,17 @@ public class Wallet : MonoBehaviour
     public void AddCoin(int amount)
     {
         coins += amount;
+    }
+
+    public bool spendCoins(int cost)
+    {
+        if (coins < cost)
+        {
+            coins -= cost;
+            return true;
+        }
+
+        return false;
     }
 
     public int getCoins()
