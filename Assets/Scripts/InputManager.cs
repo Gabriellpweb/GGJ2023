@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class InputManager : SingletonBehaviour<InputManager>
 {
-    Camera mainCamera;
+    public LayerMask selectableLayer;
+    public const string SELECTABLE_LAYER = "Selectable";
 
-    ISelectableObject selectedObject;
-    ISelectableObject hoverObject;
+    private Camera mainCamera;
+
+    private ISelectableObject selectedObject;
+    private ISelectableObject hoverObject;
 
     void Awake()
     {
@@ -19,16 +22,17 @@ public class InputManager : SingletonBehaviour<InputManager>
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        //if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer(SELECTABLE_LAYER)))
         {
             Transform objectHit = hit.transform;
 
             if (objectHit.TryGetComponent(out ISelectableObject selectableObj))
             {
+                
                 // On mouse click selectableObj
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log($" Mouse click ");
 
                     if (selectedObject != selectableObj)
                     {

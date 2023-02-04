@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 8129291588874041449}
   - component: {fileID: 8129291588874041448}
   - component: {fileID: 8129291588874041455}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerUnitSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,8 +124,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.3304164, y: 1, z: 3.3760033}
-  m_Center: {x: 0.0617038, y: 0, z: 0.0016918182}
+  m_Size: {x: 3.204875, y: 1, z: 3.3760033}
+  m_Center: {x: 0.05048114, y: 0, z: 0.0016918182}
 --- !u!1001 &8129291589457591097
 PrefabInstance:
   m_ObjectHideFlags: 0
