@@ -7,5 +7,4 @@ public interface ISelectableObject
     public void Select();
     public void Highlight();
     public void NoOutline();
-
 }

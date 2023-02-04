@@ -12,12 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4a1a27fd47e524ea2c7f1837c524a4, type: 3}
   m_Name: Outline Layers
   m_EditorClassIdentifier: 
-  selectedOutlineLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  highlightedOutlineLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  noOutlineLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  selectedOutlineLayerName: Selected Outline
+  highlightedOutlineLayerName: White Outline
+  noOutlineLayerName: No Outline
