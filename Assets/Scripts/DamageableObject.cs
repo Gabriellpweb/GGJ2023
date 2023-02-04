@@ -20,6 +20,10 @@ public class DamageableObject : MonoBehaviour
 
     public DamageableObjectTypes type;
 
+    public static string getEnemyTag()
+    {
+        return $"{DamageableObjectTypes.Enemy}";
+    }
     public static string getPlayerTag()
     {
         return $"{DamageableObjectTypes.Player}";
