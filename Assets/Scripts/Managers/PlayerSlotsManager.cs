@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerSlotsManager : SingletonBehaviour<PlayerSlotsManager>
 {
+    [SerializeField] private List<DeployableSO> deployables;
+
+    [SerializeField] private DeploymentPanelController deploymentController;
+
     private PlayerUnitSlot[] playerSlots;
 
     void Start()
@@ -11,9 +15,8 @@ public class PlayerSlotsManager : SingletonBehaviour<PlayerSlotsManager>
         playerSlots = FindObjectsByType<PlayerUnitSlot>(FindObjectsSortMode.None);
     }
 
-    // Update is called once per frame
-    void Update()
+    public DeployableSO[] GetDeployables()
     {
-        
+        return deployables.ToArray();
     }
 }

@@ -7,4 +7,5 @@ public class DeployableSO : ScriptableObject
 {
     public GameObject deployableObject;
     public Sprite objectIcon;
+    public int cost;
 }

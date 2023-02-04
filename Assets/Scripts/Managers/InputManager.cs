@@ -22,7 +22,6 @@ public class InputManager : SingletonBehaviour<InputManager>
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        //if (Physics.Raycast(ray, out hit))
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer(SELECTABLE_LAYER)))
         {
             Transform objectHit = hit.transform;
