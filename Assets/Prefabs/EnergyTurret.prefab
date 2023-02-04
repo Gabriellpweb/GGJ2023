@@ -63,7 +63,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!114 &4677310452669538974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,10 +77,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 10
+  attackRate: 1
+  attackPower: 1
   type: 1
   targetPriority: 1
   rotateTowardsTarget: 1
-  attackRate: 1
   projectilePrefab: {fileID: 8223029907174675417, guid: e92c632d364c7fe4d8ddebaf3614f298,
     type: 3}
   projectileSpawnPos: {fileID: 3079957385510380488}

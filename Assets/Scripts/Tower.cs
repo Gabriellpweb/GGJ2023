@@ -19,11 +19,11 @@ public class Tower : DamageableObject
     public bool rotateTowardsTarget;
 
     [Header("Attack")]
+    public float attackRange;
     public GameObject projectilePrefab;
     public Transform projectileSpawnPos;
 
     [Header("Projectile")]
-    public int projectileDamage;
     public float projectileSpeed;
 
     // Update is called once per frame
@@ -37,6 +37,15 @@ public class Tower : DamageableObject
 
             if (curEnemy != null && curEnemy.IsItAlive())
                 TowerAttack();
+        }
+
+        var colliders = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.GetComponent<EnemyObject>())
+            {
+                enemiesInRange.Add(collider.gameObject.GetComponent<EnemyObject>());
+            }
         }
     }
 
@@ -59,7 +68,7 @@ public class Tower : DamageableObject
             case TargetPriority.Close:
                 {
                     EnemyObject closest = null;
-                    float dist = 100;
+                    float dist = attackRange;
 
                     for (int x = 0; x < enemiesInRange.Count; x++)
                     {
@@ -105,14 +114,14 @@ public class Tower : DamageableObject
         }
 
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPos.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().Initialize(curEnemy, projectileDamage, projectileSpeed);
+        projectile.GetComponent<Projectile>().Initialize(curEnemy, attackPower, projectileSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            enemiesInRange.Add(other.GetComponent<EnemyObject>());
+            //enemiesInRange.Add(other.GetComponent<EnemyObject>());
         }
     }
 
@@ -120,7 +129,7 @@ public class Tower : DamageableObject
     {
         if (other.CompareTag("Enemy"))
         {
-            enemiesInRange.Remove(other.GetComponent<EnemyObject>());
+            //enemiesInRange.Remove(other.GetComponent<EnemyObject>());
         }
     }
 }
