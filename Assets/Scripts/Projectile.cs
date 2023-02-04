@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Enemy target;
+    private EnemyObject target;
     private int projectileDamage;
     private float projectileSpeed;
 
     public GameObject hitSpawnPrefab;
 
-    public void Initialize(Enemy target, int projectileDamage, float projectileSpeed)
+    public void Initialize(EnemyObject target, int projectileDamage, float projectileSpeed)
     {
         this.target = target;
         this.projectileDamage = projectileDamage;
