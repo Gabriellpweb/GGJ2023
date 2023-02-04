@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Outline Layers", menuName = "Custom/Visuals/Outline Layer Data")]
 public class OutlinesSO : ScriptableObject
 {
-    [SerializeField] public LayerMask selectedOutlineLayer;
-    [SerializeField] public LayerMask highlightedOutlineLayer;
-    [SerializeField] public LayerMask noOutlineLayer;
+    public string selectedOutlineLayerName;
+    public string highlightedOutlineLayerName;
+    public string noOutlineLayerName;
 }

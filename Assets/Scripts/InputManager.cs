@@ -9,9 +9,8 @@ public class InputManager : SingletonBehaviour<InputManager>
     ISelectableObject selectedObject;
     ISelectableObject hoverObject;
 
-    void Start()
+    void Awake()
     {
-        DontDestroyOnLoad(this);
         mainCamera = Camera.main;
     }
 
@@ -26,25 +25,28 @@ public class InputManager : SingletonBehaviour<InputManager>
 
             if (objectHit.TryGetComponent(out ISelectableObject selectableObj))
             {
-                Debug.Log($"Selectable found! {selectableObj} ");
-
-                // On mouse click
+                // On mouse click selectableObj
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (selectedObject != null && selectedObject != selectableObj)
+                    Debug.Log($" Mouse click ");
+
+                    if (selectedObject != selectableObj)
                     {
-                        selectedObject.NoOutline();
+                        if (selectedObject != null)
+                        {
+                            selectedObject.NoOutline();
+                            hoverObject = null;
+                        }
                         selectedObject = selectableObj;
                         selectedObject.Select();
-                        hoverObject = null;
                     }
                 }
-                // On mouse hover
+                // On mouse hover selectableObj
                 else
                 {
-                    if (hoverObject != null && selectableObj != hoverObject)
+                    if (selectableObj != hoverObject && selectableObj != selectedObject)
                     {
-                        if (hoverObject != null)
+                        if (hoverObject != null && hoverObject != selectedObject)
                         {
                             hoverObject.NoOutline();
                         }
@@ -55,7 +57,7 @@ public class InputManager : SingletonBehaviour<InputManager>
             }
             else
             {
-                if (hoverObject != null)
+                if (hoverObject != null && hoverObject != selectedObject)
                 {
                     hoverObject.NoOutline();
                     hoverObject = null;

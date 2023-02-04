@@ -10,20 +10,20 @@ public class BaseSelectableObject : MonoBehaviour, ISelectableObject
     public void Highlight()
     {
         Validate();
-        visualObjectToOutline.layer = outlineSO.highlightedOutlineLayer.value;
+        visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.highlightedOutlineLayerName);
     }
 
     public void Select()
     {
         Validate();
-        visualObjectToOutline.layer = outlineSO.selectedOutlineLayer.value;
+        visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.selectedOutlineLayerName);
     }
 
 
     public void NoOutline()
     {
         Validate();
-        visualObjectToOutline.layer = outlineSO.noOutlineLayer.value;
+        visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.noOutlineLayerName);
     }
 
     public void Validate()
