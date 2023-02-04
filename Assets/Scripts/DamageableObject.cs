@@ -8,7 +8,7 @@ public class DamageableObject : MonoBehaviour
     public int lifePoints = 2;
     public float attackRate = 1;
     public int attackPower = 1;
-    float lastAttackTime;
+    protected float lastAttackTime;
 
     protected GameObject target;
 
