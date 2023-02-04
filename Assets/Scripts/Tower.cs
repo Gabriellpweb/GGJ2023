@@ -13,6 +13,8 @@ public class Tower : DamageableObject, IDeployableObject
         Strong
     }
 
+    public event GenericEventHandler OnAttack;
+
     [Header("Info")] 
     private List<EnemyObject> enemiesInRange = new List<EnemyObject>();
     private EnemyObject curEnemy;
@@ -53,6 +55,11 @@ public class Tower : DamageableObject, IDeployableObject
                 TowerAttack();
         }
 
+        FindEnemiesInRange();
+    }
+
+    void FindEnemiesInRange()
+    {
         var colliders = Physics.OverlapSphere(transform.position, attackRange);
         foreach (var collider in colliders)
         {
@@ -68,10 +75,14 @@ public class Tower : DamageableObject, IDeployableObject
         enemiesInRange.RemoveAll(x => x == null);
 
         if (enemiesInRange.Count == 0)
+        {
             return null;
+        }
 
         if (enemiesInRange.Count == 1)
+        {
             return enemiesInRange[0];
+        }
 
         switch (targetPriority)
         {
@@ -127,6 +138,7 @@ public class Tower : DamageableObject, IDeployableObject
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
 
+        OnAttack?.Invoke(this, EventArgs.Empty);
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPos.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().Initialize(curEnemy, attackPower, projectileSpeed);
     }
