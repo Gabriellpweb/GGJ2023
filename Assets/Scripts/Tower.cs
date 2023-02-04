@@ -19,7 +19,6 @@ public class Tower : DamageableObject
     public bool rotateTowardsTarget;
 
     [Header("Attack")]
-    public float attackRate;
     private float lastAttackTime;
     public GameObject projectilePrefab;
     public Transform projectileSpawnPos;

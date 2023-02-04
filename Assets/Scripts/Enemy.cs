@@ -8,10 +8,7 @@ public class Enemy : DamageableObject
     // Update is called once per frame
     void Update()
     {
-        if (this.lifePoints == 0)
-        {
-            Destroy(gameObject);
-        }
+        IsItAlive();
     }
 
     public void TakeDamage(int damage)

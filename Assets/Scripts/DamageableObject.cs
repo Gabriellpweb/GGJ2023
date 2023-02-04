@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DamageableObject : MonoBehaviour
 {
-    public int lifePoints = 10;
+
+    public int lifePoints = 2;
+    public int attackRate = 1;
+    public int attackPower = 1;
     float lastAttackTime;
-    float updateInterval = 0.5F;
-    int attackRate = 1;
 
     protected GameObject target;
 
@@ -24,34 +25,36 @@ public class DamageableObject : MonoBehaviour
         return $"{DamageableObjectTypes.Player}";
     }
 
-    void Attack()
+    public void TakeDamage(int damage)
+    {
+        this.lifePoints -= damage;
+    }
+
+    protected void Attack()
     {
        
         if (target == null) { //there is no target, nothing to do here
-            Debug.Log("Attack method target NULL");
+            //Debug.Log("Attack method target NULL");
             return;
         }
-        Debug.Log("Attack method w/ target");
-        float currentTime = Time.time;
-
-        if (lastAttackTime == null || (currentTime - lastAttackTime > attackRate)) {
-            lastAttackTime = currentTime;
+       
+        if (Time.time - lastAttackTime > attackRate) {
+            lastAttackTime = Time.time;
             DamageableObject damageableComp = target.GetComponent<DamageableObject>();
-            Debug.Log("VAI MORRE!! VAI MORRE!");
+            damageableComp.TakeDamage(attackPower);
+            Debug.Log($"Attacked HP {damageableComp.lifePoints}");
+            damageableComp.IsItAlive();
         }
     }
 
-    void IsItAlive()
+    public bool IsItAlive()
     {
         if (lifePoints <= 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
+            return false;
         }
-    }
 
-    private void Update()
-    {
-        IsItAlive();
-        Attack();
+        return true;
     }
 }

@@ -87,15 +87,11 @@ public class EnemyObject : DamageableObject
         {
             navMeshAgent.destination = target.position;
         }
-
-        Debug.Log("Eu fui executado ");
     }
-
 
     private void Start()
     {
         FindClosestPlayer();
-        
     }
 
     private void Update()
@@ -105,6 +101,6 @@ public class EnemyObject : DamageableObject
             FindClosestPlayer();
         }
 
-        
+        Attack();
     }
 }
