@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Bits: 64
   outlinesOccluderLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   outlineSettings:
     outlineColor: {r: 1, g: 1, b: 1, a: 1}
     outlineScale: 2.2
@@ -142,7 +142,7 @@ MonoBehaviour:
   outlineSettings:
     outlineColor: {r: 0.9528302, g: 0.7855745, b: 0.25618547, a: 1}
     outlineScale: 2
-    depthThreshold: 1.5
+    depthThreshold: 53.2
     robertsCrossMultiplier: 100
     normalThreshold: 0.4
     steepAngleThreshold: 0.2
