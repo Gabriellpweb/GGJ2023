@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,10 @@ public class DamageableObject : MonoBehaviour
     protected float lastAttackTime;
 
     protected GameObject target;
+
+    public event GenericEventHandler OnDie;
+
+    public delegate void GenericEventHandler(object sender, EventArgs e);
 
     public enum DamageableObjectTypes
     {
@@ -57,6 +62,7 @@ public class DamageableObject : MonoBehaviour
         if (lifePoints <= 0)
         {
             Destroy(gameObject);
+            OnDie?.Invoke(this, EventArgs.Empty);
             return false;
         }
 

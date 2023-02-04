@@ -24,7 +24,12 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
 
     public void DeployUnit(GameObject deployableUnit)
     {
-        Debug.Log("Trying to deploy");
+        if (!IsAvailable())
+        {
+            Debug.LogError("Trying to deploy wih");
+            return;
+        }
+        
         if (deployableUnit.TryGetComponent(out IDeployableObject deployable))
         {
             Debug.Log("Trying to instantiate");
@@ -32,6 +37,11 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
 
             deployable.Deploy(this);
         }
+    }
+
+    public void UnsubscribeHostedObject(IDeployableObject deployableObj)
+    {
+        hostedUnit = null;
     }
 
     #region Section and Hover Highligh
@@ -82,5 +92,7 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
             Debug.LogError("No Outline Assigned");
         }
     }
+
+    
     #endregion
 }

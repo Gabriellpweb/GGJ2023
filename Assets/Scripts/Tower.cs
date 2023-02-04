@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : DamageableObject
+public class Tower : DamageableObject, IDeployableObject
 {
     public enum TargetPriority
     {
@@ -25,6 +26,13 @@ public class Tower : DamageableObject
 
     [Header("Projectile")]
     public float projectileSpeed;
+
+    private IDeployableObjectHoster hoster;
+
+    private void Awake()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
@@ -131,5 +139,15 @@ public class Tower : DamageableObject
         {
             //enemiesInRange.Remove(other.GetComponent<EnemyObject>());
         }
+    }
+
+    private void Die(EventArgs e)
+    {
+        hoster.UnsubscribeHostedObject(this);
+    }
+
+    public void Deploy(IDeployableObjectHoster hosterObject)
+    {
+        hoster = hosterObject;
     }
 }

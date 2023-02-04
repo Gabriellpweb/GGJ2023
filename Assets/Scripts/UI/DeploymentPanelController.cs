@@ -22,14 +22,7 @@ public class DeploymentPanelController : MonoBehaviour
     /// <param name="deployables"></param>
     public void SetDeployables(DeployableSO[] deployables)
     {
-        foreach (DeployableItem deployableItem in deployableItems)
-        {
-            deployableItem.button.onClick.RemoveAllListeners();
-            deployableItem.transform.SetParent(null);
-            Destroy(deployableItem);
-        }
-        deployableItems.Clear();
-
+        Clean();
         foreach (DeployableSO deployableSO in deployables)
         {
             // Mount deployableItem
@@ -44,6 +37,17 @@ public class DeploymentPanelController : MonoBehaviour
         }
     }
 
+    private void Clean()
+    {
+        foreach (DeployableItem deployableItem in deployableItems)
+        {
+            deployableItem.thumb.sprite = null;
+            deployableItem.textMesh.text = null;
+            deployableItem.button.onClick.RemoveAllListeners();
+            Destroy(deployableItem.gameObject);
+        }
+        deployableItems.Clear();
+    }
     public void Open(PlayerUnitSlot slot)
     {
         selectedSlot = slot;
@@ -51,13 +55,16 @@ public class DeploymentPanelController : MonoBehaviour
 
     public void Close()
     {
+        Clean();
         selectedSlot = null;
+        gameObject.SetActive(false);
     }
 
     public void DeployUnit(DeployableSO deployableSO)
     {
         Debug.Log($"Deploy {deployableSO.deployableLabel}");
         selectedSlot.DeployUnit(deployableSO.deployableObject);
+        Close();
     }
 
 }
