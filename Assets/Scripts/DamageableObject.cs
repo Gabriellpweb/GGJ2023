@@ -8,7 +8,7 @@ public class DamageableObject : MonoBehaviour
     public int lifePoints = 2;
     public float attackRate = 1;
     public int attackPower = 1;
-    float lastAttackTime;
+    protected float lastAttackTime;
 
     protected GameObject target;
 
@@ -20,6 +20,10 @@ public class DamageableObject : MonoBehaviour
 
     public DamageableObjectTypes type;
 
+    public static string getEnemyTag()
+    {
+        return $"{DamageableObjectTypes.Enemy}";
+    }
     public static string getPlayerTag()
     {
         return $"{DamageableObjectTypes.Player}";
@@ -34,10 +38,11 @@ public class DamageableObject : MonoBehaviour
     {
        
         if (target == null) { //there is no target, nothing to do here
-            //Debug.Log("Attack method target NULL");
+            Debug.Log("Attack method target NULL");
             return;
         }
-       
+
+        Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
         if (Time.time - lastAttackTime > attackRate) {
             lastAttackTime = Time.time;
             DamageableObject damageableComp = target.GetComponent<DamageableObject>();
