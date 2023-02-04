@@ -18,13 +18,13 @@ public class EnemyObject : DamageableObject
     {
         if (collidedGameObject == null)
         {
-            Debug.Log("CollidedGameObject Null");
+            //Debug.Log("CollidedGameObject Null");
             return false ;
         }
 
         if (!collidedGameObject.CompareTag(DamageableObject.getPlayerTag()))
         {
-            Debug.Log("Wrong Tag");
+            //Debug.Log("Wrong Tag");
             return false;
         }
 
@@ -33,7 +33,7 @@ public class EnemyObject : DamageableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("it scratched me");
+        //Debug.Log("it scratched me");
 
         GameObject collidedGameObject = other.gameObject;
         if (!isPlayer(other.gameObject)) {
@@ -89,13 +89,13 @@ public class EnemyObject : DamageableObject
 
     void OnDestroy()
     {
-        wallet.AddCoin(enemyDefaultReward);
+        //wallet.AddCoin(enemyDefaultReward);
     }
 
     private void Start()
     {
         FindClosestPlayer();
-        wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
+        //wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }
 
     private void Update()

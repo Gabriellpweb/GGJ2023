@@ -38,7 +38,7 @@ public class DamageableObject : MonoBehaviour
     {
        
         if (target == null) { //there is no target, nothing to do here
-            Debug.Log("Attack method target NULL");
+            //Debug.Log("Attack method target NULL");
             return;
         }
 
@@ -47,7 +47,7 @@ public class DamageableObject : MonoBehaviour
             lastAttackTime = Time.time;
             DamageableObject damageableComp = target.GetComponent<DamageableObject>();
             damageableComp.TakeDamage(attackPower);
-            Debug.Log($"Attacked HP {damageableComp.lifePoints}");
+            //Debug.Log($"Attacked HP {damageableComp.lifePoints}");
             damageableComp.IsItAlive();
         }
     }
