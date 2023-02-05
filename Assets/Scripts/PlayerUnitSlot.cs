@@ -7,6 +7,8 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
     [SerializeField] private Transform placementPoint;
     [SerializeField] private GameObject visualObjectToOutline;
     [SerializeField] private OutlinesSO outlineSO;
+    [SerializeField] private GameObject highlightObj;
+    [SerializeField] private GameObject selectedObj;
 
     private GameObject hostedUnit;
 
@@ -59,6 +61,10 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
             return;
         }
         CanHighlight();
+        if (highlightObj != null)
+        {
+            highlightObj.SetActive(true);
+        }
         visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.highlightedOutlineLayerName);
     }
 
@@ -69,6 +75,14 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
             return;
         }
         CanHighlight();
+        if (selectedObj != null)
+        {
+            selectedObj.SetActive(true);
+        }
+        if (highlightObj != null)
+        {
+            highlightObj.SetActive(false);
+        }
         visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.selectedOutlineLayerName);
 
         if (slotManagerRef == null)
@@ -84,6 +98,14 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
     public void NoOutline()
     {
         CanHighlight();
+        if (highlightObj != null)
+        {
+            highlightObj.SetActive(false);
+        }
+        if (selectedObj != null)
+        {
+            selectedObj.SetActive(false);
+        }
         visualObjectToOutline.layer = LayerMask.NameToLayer(outlineSO.noOutlineLayerName);
     }
 

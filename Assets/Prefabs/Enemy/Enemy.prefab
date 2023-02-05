@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 9151574831656218966}
   lifePoints: 3
-  attackRate: 1
+  attackRate: 2
   attackPower: 1
   type: 0
   animator: {fileID: 4337594024617443321}

@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1971642243015847753}
-  lifePoints: 1000
+  lifePoints: 30
   attackRate: 0
   attackPower: 0
   type: 1

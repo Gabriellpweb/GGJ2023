@@ -14,7 +14,7 @@ public class EnemyObject : DamageableObject
 
     NavMeshAgent navMeshAgent;
     GameObject currentTarget;
-    int enemyDefaultReward = 1;
+    int enemyDefaultReward = 4;
 
     Vector3 previousPosition;
     float curSpeed = 0;

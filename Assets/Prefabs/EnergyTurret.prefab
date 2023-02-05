@@ -68,11 +68,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 363894715966976109}
   lifePoints: 10
-  attackRate: 0.1
+  attackRate: 0.6
   attackPower: 1
   type: 1
-  fireSound: {fileID: 8300000, guid: ac80580fdabd70944877b0f0dbeec768, type: 3}
-  audioSource: {fileID: 1807586825802311800}
   targetPriority: 1
   rotateTowardsTarget: 1
   attackRange: 13

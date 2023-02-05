@@ -45,6 +45,11 @@ public class Timer : MonoBehaviour
                 OnTime?.Invoke(this, bonusCoinsPerTime); 
             }
 
+        } 
+        // Time over, you win
+        else 
+        {
+            WinLoseController.instance.ShowWinText();
         }
         DisplayTime(remainingTime);
     }
