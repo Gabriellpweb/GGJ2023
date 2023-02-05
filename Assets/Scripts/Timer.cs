@@ -71,12 +71,25 @@ public class Timer : MonoBehaviour
             break;
         }
 
-        if (ArrayUtility.Contains<int>(secsWithDiffColor, ((int)seconds)))
+        if (containInt((int)seconds))
         {
             text.color = Color.red;
         }
 
         minute = minutes;
 
+    }
+
+    bool containInt(int i) //ewww
+    {
+        foreach (int n in secsWithDiffColor)
+        {
+            if (i == n)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
