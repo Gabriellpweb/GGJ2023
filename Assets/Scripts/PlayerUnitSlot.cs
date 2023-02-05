@@ -34,8 +34,8 @@ public class PlayerUnitSlot : MonoBehaviour, ISelectableObject, IDeployableObjec
         {
             if (!slotManagerRef.PurchaseDeployment(cost))
             {
-                Debug.LogError("Not enought points.");
-                // TODO: Toast message?
+                Debug.Log("Not enought points.");
+                ToastDirector.instance.CreateToastTextWorldPosition("No Money, no Honey!", transform.position);
                 return;
             }
             

@@ -30,19 +30,6 @@ public class Tower : DamageableObject, IDeployableObject
     [Header("Projectile")]
     public float projectileSpeed;
 
-
-    void Start()
-    {
-        StartCoroutine(SelfKill());
-    }
-
-    IEnumerator SelfKill()
-    {
-        yield return new WaitForSeconds(1f);
-        TakeDamage(3);
-    }
-
-    // Update is called once per frame
     void Update()
     {
         // attack every "attackRate" seconds

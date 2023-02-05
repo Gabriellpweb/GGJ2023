@@ -82,7 +82,7 @@ MonoBehaviour:
   type: 1
   targetPriority: 1
   rotateTowardsTarget: 1
-  attackRange: 0
+  attackRange: 5
   projectilePrefab: {fileID: 8223029907174675417, guid: e92c632d364c7fe4d8ddebaf3614f298,
     type: 3}
   projectileSpawnPos: {fileID: 3079957385510380488}
