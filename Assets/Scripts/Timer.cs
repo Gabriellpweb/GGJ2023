@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,18 @@ using UnityEditor;
 
 public class Timer : MonoBehaviour
 {
+    public delegate void GenericEventHandler(object sender, int e);
+    public event GenericEventHandler OnTime;
+
     private TextMeshProUGUI text;
-    public int bonusCoinsPerTime = 1;
+    public int bonusCoinsPerTime = 15;
     public float remainingTime = 300;
     public TextMeshProUGUI timeText;
     public float currencyTimeInterval = 10;
     private int[] secsWithDiffColor;
-    private int coins = 0;
     private float lastTimeCurrencyGained = 0;
     public float minute;
+
     private void Awake()
     {
         minute = remainingTime / 60;
@@ -24,7 +28,6 @@ public class Timer : MonoBehaviour
     {
         secsWithDiffColor = new int[] { 0, 1, 59, 58, 2 };
         text = GetComponent<TextMeshProUGUI>();
-        
     }
 
     // Update is called once per frame
@@ -38,8 +41,8 @@ public class Timer : MonoBehaviour
             if (Time.time - lastTimeCurrencyGained > currencyTimeInterval)
             {
                 lastTimeCurrencyGained = Time.time;
-                coins += bonusCoinsPerTime;
-                
+                Debug.Log(bonusCoinsPerTime);
+                OnTime?.Invoke(this, bonusCoinsPerTime); 
             }
 
         }

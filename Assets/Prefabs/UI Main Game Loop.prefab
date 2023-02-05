@@ -542,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   coins: 100
+  timerController: {fileID: 7347673739605036983}
 --- !u!1 &7347673740915588836
 GameObject:
   m_ObjectHideFlags: 0

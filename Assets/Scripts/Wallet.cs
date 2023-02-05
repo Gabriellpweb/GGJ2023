@@ -8,12 +8,20 @@ public class Wallet : SingletonBehaviour<Wallet>
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] public int coins;
     [SerializeField] static  public int TowerCost = 25;
+    [SerializeField] private Timer timerController;
 
     string defaultCoinText = "Coins: ";
     // Start is called before the first frame update
     void Start()
     {
         coins = 100;
+        timerController.OnTime += AddBonusCoin;
+    }
+
+    private void AddBonusCoin(object sender, int coin)
+    {
+        Debug.Log(coin);
+        AddCoin(coin);
     }
 
     public void AddCoin(int amount)
@@ -23,7 +31,7 @@ public class Wallet : SingletonBehaviour<Wallet>
 
     public bool spendCoins(int cost)
     {
-        if (coins > cost)
+        if (coins >= cost)
         {
             coins -= cost;
             return true;
