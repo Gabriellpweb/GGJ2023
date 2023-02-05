@@ -24,13 +24,11 @@ public class EnemyObject : DamageableObject
     {
         if (collidedGameObject == null)
         {
-            //Debug.Log("CollidedGameObject Null");
             return false ;
         }
 
         if (!collidedGameObject.CompareTag(DamageableObject.getPlayerTag()))
         {
-            //Debug.Log("Wrong Tag");
             return false;
         }
 
@@ -39,8 +37,6 @@ public class EnemyObject : DamageableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("it scratched me");
-
         GameObject collidedGameObject = other.gameObject;
         if (!isPlayer(other.gameObject)) {
             return;
@@ -65,8 +61,6 @@ public class EnemyObject : DamageableObject
         Transform target = null;
         foreach (GameObject player in players)
         {
-            Debug.Log($"Player units found {player.name}");
-
             if (!NavMesh.CalculatePath(transform.position, player.transform.position, navMeshAgent.areaMask, path))
             { //err during calc
                 continue;
@@ -96,13 +90,13 @@ public class EnemyObject : DamageableObject
 
     void OnDestroy()
     {
-        //wallet.AddCoin(enemyDefaultReward);
+        wallet.AddCoin(enemyDefaultReward);
     }
 
     private void Start()
     {
         FindClosestPlayer();
-        //wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
+        wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }
 
     protected void Attack()
@@ -110,11 +104,9 @@ public class EnemyObject : DamageableObject
 
         if (target == null)
         { //there is no target, nothing to do here
-            //Debug.Log("Attack method target NULL");
             return;
         }
 
-        //Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
         if (Time.time - lastAttackTime > attackRate)
         {
             float targetDistance = Vector3.Distance(transform.position, target.transform.position);
@@ -123,7 +115,6 @@ public class EnemyObject : DamageableObject
                 lastAttackTime = Time.time;
                 DamageableObject damageableComp = target.GetComponent<DamageableObject>();
                 damageableComp.TakeDamage(attackPower);
-                //Debug.Log($"Attacked HP {damageableComp.lifePoints}");
                 damageableComp.IsItAlive();
                 animator.SetTrigger(ATACK_ANIM_PARAM);
             } else

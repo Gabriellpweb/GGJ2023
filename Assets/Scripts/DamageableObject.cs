@@ -40,8 +40,6 @@ public class DamageableObject : MonoBehaviour
         IsItAlive();
     }
 
-    
-
     public bool IsItAlive()
     {
         if (lifePoints <= 0)
