@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private AudioSource pewSource;
     private EnemyObject target;
     private int projectileDamage;
     private float projectileSpeed;
@@ -15,6 +16,7 @@ public class Projectile : MonoBehaviour
         this.target = target;
         this.projectileDamage = projectileDamage;
         this.projectileSpeed = projectileSpeed;
+        pewSource.Play();
     }
 
     // Update is called once per frame

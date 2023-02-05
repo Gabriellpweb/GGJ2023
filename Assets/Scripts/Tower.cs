@@ -13,10 +13,6 @@ public class Tower : DamageableObject, IDeployableObject
         Strong
     }
 
-
-    [SerializeField] private AudioClip fireSound;
-    [SerializeField] private AudioSource audioSource;
-
     public event GenericEventHandler OnAttack;
 
     [Header("Info")] 
