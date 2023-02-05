@@ -50,11 +50,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 9151574831656218966}
-  lifePoints: 2
+  lifePoints: 3
   attackRate: 1
   attackPower: 1
   type: 0
   animator: {fileID: 4337594024617443321}
+  attackDistanceThreshold: 0
 --- !u!54 &-5111200743362256629
 Rigidbody:
   m_ObjectHideFlags: 0

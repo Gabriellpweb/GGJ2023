@@ -10,7 +10,7 @@ public class Wallet : SingletonBehaviour<Wallet>
     [SerializeField] static  public int TowerCost = 25;
     [SerializeField] private Timer timerController;
 
-    string defaultCoinText = "Coins: ";
+    string defaultCoinText = "SEEDS: ";
     // Start is called before the first frame update
     void Start()
     {

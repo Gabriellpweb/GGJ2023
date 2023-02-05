@@ -14,7 +14,6 @@ public class EnemyObject : DamageableObject
 
     NavMeshAgent navMeshAgent;
     GameObject currentTarget;
-    Wallet wallet;
     int enemyDefaultReward = 1;
 
     Vector3 previousPosition;
@@ -109,14 +108,13 @@ public class EnemyObject : DamageableObject
 
     void OnDestroy()
     {
-        //wallet.AddCoin(enemyDefaultReward);
+        Wallet.instance.AddCoin(enemyDefaultReward);
     }
 
     private void Start()
     {
         base.Start();
         FindClosestPlayer();
-        //wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }
 
     protected void Attack()
@@ -157,8 +155,11 @@ public class EnemyObject : DamageableObject
             }
         } else
         {
-            navMeshAgent.ResetPath();
-            navMeshAgent.SetDestination(target.transform.position);
+            if (Time.deltaTime % 2 == 0)
+            {
+                navMeshAgent.ResetPath();
+                navMeshAgent.SetDestination(target.transform.position);
+            }
         }
         
     }
@@ -169,6 +170,7 @@ public class EnemyObject : DamageableObject
         {
             return true;
         }
+
         return false;
     }
 
