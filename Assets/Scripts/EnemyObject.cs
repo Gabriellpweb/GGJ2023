@@ -71,7 +71,8 @@ public class EnemyObject : DamageableObject
             { //err during calc
                 continue;
             }
-            
+
+            Debug.Log($"Validating distance");
             float distance = Vector3.Distance(transform.position, path.corners[0]);
             for (int i = 1; i < path.corners.Length; i++)
             {
@@ -80,6 +81,7 @@ public class EnemyObject : DamageableObject
 
             if (distance < ShortestDistance)
             {
+                Debug.Log($"Shortest one found!");
                 target = player.transform;
                 ShortestDistance = distance;
                 currentTarget = player;
@@ -115,22 +117,43 @@ public class EnemyObject : DamageableObject
         }
 
         //Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
+        
+        float targetDistance = Vector3.Distance(transform.position, target.transform.position);
+        if (targetDistance <= navMeshAgent.stoppingDistance)
+        {
+            DamageableObject damageableComp = target.GetComponent<DamageableObject>();
+
+            if (damageableComp.IsItAlive())
+            {
+                if (CanAttack())
+                {
+                    lastAttackTime = Time.time;
+                    damageableComp.TakeDamage(attackPower);
+                    //Debug.Log($"Attacked HP {damageableComp.lifePoints}");
+                    animator.SetTrigger(ATACK_ANIM_PARAM);
+                }
+            }
+            else
+            {
+                target = null;
+                currentTarget = null;
+                navMeshAgent.isStopped = true;
+            }
+        } else
+        {
+            navMeshAgent.ResetPath();
+            navMeshAgent.SetDestination(target.transform.position);
+        }
+        
+    }
+
+    private bool CanAttack()
+    {
         if (Time.time - lastAttackTime > attackRate)
         {
-            float targetDistance = Vector3.Distance(transform.position, target.transform.position);
-            if (targetDistance <= navMeshAgent.stoppingDistance)
-            {
-                lastAttackTime = Time.time;
-                DamageableObject damageableComp = target.GetComponent<DamageableObject>();
-                damageableComp.TakeDamage(attackPower);
-                //Debug.Log($"Attacked HP {damageableComp.lifePoints}");
-                damageableComp.IsItAlive();
-                animator.SetTrigger(ATACK_ANIM_PARAM);
-            } else
-            {
-                navMeshAgent.SetDestination(target.transform.position);
-            }
+            return true;
         }
+        return false;
     }
 
     private void Update()

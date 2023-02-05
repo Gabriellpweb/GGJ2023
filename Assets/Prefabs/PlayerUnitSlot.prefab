@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 8129291588874041449}
   - component: {fileID: 8129291588874041448}
   - component: {fileID: 8129291588874041455}
+  - component: {fileID: 3208468529680028470}
   m_Layer: 9
   m_Name: PlayerUnitSlot
   m_TagString: Untagged
@@ -110,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912884973ed88ec41bbd80dbd8283e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placementPoint: {fileID: 411513041780722215}
   visualObjectToOutline: {fileID: 116435603819527857}
   outlineSO: {fileID: 11400000, guid: f9bdc28bdfc2b5b45bf035fc5a3f988d, type: 2}
-  placementPoint: {fileID: 411513041780722215}
 --- !u!65 &8129291588874041455
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,6 +127,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.204875, y: 1, z: 3.3760033}
   m_Center: {x: 0.05048114, y: 0, z: 0.0016918182}
+--- !u!208 &3208468529680028470
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129291588874041450}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.2, y: 1, z: 1.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.2
 --- !u!1001 &8129291589457591097
 PrefabInstance:
   m_ObjectHideFlags: 0
