@@ -10,6 +10,7 @@ public class EnemyObject : DamageableObject
     public const string ATACK_ANIM_PARAM = "Attack";
 
     [SerializeField] private Animator animator;
+    [SerializeField] float attackDistanceThreshold = 1f;
 
     NavMeshAgent navMeshAgent;
     GameObject currentTarget;
@@ -18,6 +19,8 @@ public class EnemyObject : DamageableObject
 
     Vector3 previousPosition;
     float curSpeed = 0;
+
+    Bounds lastTargetBounds;
 
 
     private bool isPlayer(GameObject collidedGameObject)
@@ -46,7 +49,15 @@ public class EnemyObject : DamageableObject
             return;
         }
 
+     
         target = other.gameObject;
+        lastTargetBounds = other.bounds;
+        float halfSize = lastTargetBounds.size.x / 2;
+        if (halfSize > navMeshAgent.stoppingDistance)
+        {
+            navMeshAgent.isStopped = true;
+        }
+        
     }
 
     
@@ -62,7 +73,7 @@ public class EnemyObject : DamageableObject
         GameObject[] players = GameObject.FindGameObjectsWithTag(DamageableObject.getPlayerTag());
         float ShortestDistance = float.MaxValue;
 
-        Transform target = null;
+        Transform playerTarget = null;
         foreach (GameObject player in players)
         {
             Debug.Log($"Player units found {player.name}");
@@ -82,16 +93,16 @@ public class EnemyObject : DamageableObject
             if (distance < ShortestDistance)
             {
                 Debug.Log($"Shortest one found!");
-                target = player.transform;
+                playerTarget = player.transform;
                 ShortestDistance = distance;
                 currentTarget = player;
             }
 
         }
 
-        if (target != null)
+        if (playerTarget != null)
         {
-            navMeshAgent.destination = target.position;
+            navMeshAgent.destination = playerTarget.position;
             navMeshAgent.isStopped = false;
         }
     }
@@ -114,13 +125,17 @@ public class EnemyObject : DamageableObject
         if (target == null)
         { //there is no target, nothing to do here
             //Debug.Log("Attack method target NULL");
+            currentTarget = null;
             return;
         }
 
         //Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
         
         float targetDistance = Vector3.Distance(transform.position, target.transform.position);
-        if (targetDistance <= navMeshAgent.stoppingDistance)
+
+        float halfSize = lastTargetBounds.size.x / 2;
+        Debug.Log($"half size: {halfSize}, navmesh dist: {navMeshAgent.stoppingDistance}");
+        if (targetDistance <= navMeshAgent.stoppingDistance || halfSize > navMeshAgent.stoppingDistance - attackDistanceThreshold)
         {
             DamageableObject damageableComp = target.GetComponent<DamageableObject>();
 
@@ -169,9 +184,13 @@ public class EnemyObject : DamageableObject
         }
         else
         {
-            Vector3 newTargetPosition = currentTarget.transform.position;
-            newTargetPosition.y = 0;
-            transform.LookAt(newTargetPosition);
+            // Look to the current target
+            if (currentTarget != null)
+            {
+                Vector3 newTargetPosition = currentTarget.transform.position;
+                newTargetPosition.y = 0;
+                transform.LookAt(newTargetPosition);
+            }
         }
 
         animator.SetFloat(SPEED_ANIM_PARAM, curSpeed);
