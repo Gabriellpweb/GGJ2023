@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float LastSpawn;
-    public int spawnRate;
+    public float LastSpawn = 1;
+    public int spawnRate = 10;
     public GameObject EnemyPreFreb;
     Timer timer;
     // Start is called before the first frame update
     void Start()
     {
-        LastSpawn = 1;
-        spawnRate = 10; // decrease to increase the amount of monsters
         GameObject timerObject = GameObject.Find("TIMER");
         timer = timerObject.GetComponent<Timer>();
     }
