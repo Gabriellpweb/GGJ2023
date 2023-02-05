@@ -24,11 +24,13 @@ public class EnemyObject : DamageableObject
     {
         if (collidedGameObject == null)
         {
+            //Debug.Log("CollidedGameObject Null");
             return false ;
         }
 
         if (!collidedGameObject.CompareTag(DamageableObject.getPlayerTag()))
         {
+            //Debug.Log("Wrong Tag");
             return false;
         }
 
@@ -37,6 +39,8 @@ public class EnemyObject : DamageableObject
 
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.Log("it scratched me");
+
         GameObject collidedGameObject = other.gameObject;
         if (!isPlayer(other.gameObject)) {
             return;
@@ -61,11 +65,14 @@ public class EnemyObject : DamageableObject
         Transform target = null;
         foreach (GameObject player in players)
         {
+            Debug.Log($"Player units found {player.name}");
+
             if (!NavMesh.CalculatePath(transform.position, player.transform.position, navMeshAgent.areaMask, path))
             { //err during calc
                 continue;
             }
-            
+
+            Debug.Log($"Validating distance");
             float distance = Vector3.Distance(transform.position, path.corners[0]);
             for (int i = 1; i < path.corners.Length; i++)
             {
@@ -74,6 +81,7 @@ public class EnemyObject : DamageableObject
 
             if (distance < ShortestDistance)
             {
+                Debug.Log($"Shortest one found!");
                 target = player.transform;
                 ShortestDistance = distance;
                 currentTarget = player;
@@ -90,13 +98,14 @@ public class EnemyObject : DamageableObject
 
     void OnDestroy()
     {
-        wallet.AddCoin(enemyDefaultReward);
+        //wallet.AddCoin(enemyDefaultReward);
     }
 
     private void Start()
     {
+        base.Start();
         FindClosestPlayer();
-        wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
+        //wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }
 
     protected void Attack()
@@ -104,24 +113,48 @@ public class EnemyObject : DamageableObject
 
         if (target == null)
         { //there is no target, nothing to do here
+            //Debug.Log("Attack method target NULL");
             return;
         }
 
+        //Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
+        
+        float targetDistance = Vector3.Distance(transform.position, target.transform.position);
+        if (targetDistance <= navMeshAgent.stoppingDistance)
+        {
+            DamageableObject damageableComp = target.GetComponent<DamageableObject>();
+
+            if (damageableComp.IsItAlive())
+            {
+                if (CanAttack())
+                {
+                    lastAttackTime = Time.time;
+                    damageableComp.TakeDamage(attackPower);
+                    //Debug.Log($"Attacked HP {damageableComp.lifePoints}");
+                    animator.SetTrigger(ATACK_ANIM_PARAM);
+                }
+            }
+            else
+            {
+                target = null;
+                currentTarget = null;
+                navMeshAgent.isStopped = true;
+            }
+        } else
+        {
+            navMeshAgent.ResetPath();
+            navMeshAgent.SetDestination(target.transform.position);
+        }
+        
+    }
+
+    private bool CanAttack()
+    {
         if (Time.time - lastAttackTime > attackRate)
         {
-            float targetDistance = Vector3.Distance(transform.position, target.transform.position);
-            if (targetDistance <= navMeshAgent.stoppingDistance)
-            {
-                lastAttackTime = Time.time;
-                DamageableObject damageableComp = target.GetComponent<DamageableObject>();
-                damageableComp.TakeDamage(attackPower);
-                damageableComp.IsItAlive();
-                animator.SetTrigger(ATACK_ANIM_PARAM);
-            } else
-            {
-                navMeshAgent.SetDestination(target.transform.position);
-            }
+            return true;
         }
+        return false;
     }
 
     private void Update()

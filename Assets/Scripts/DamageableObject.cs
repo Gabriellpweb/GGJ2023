@@ -6,6 +6,7 @@ using UnityEngine;
 public class DamageableObject : MonoBehaviour
 {
 
+    [SerializeField] private HealthBar healthBar;
     public int lifePoints = 2;
     public float attackRate = 1;
     public int attackPower = 1;
@@ -25,6 +26,11 @@ public class DamageableObject : MonoBehaviour
 
     public DamageableObjectTypes type;
 
+    protected void Start()
+    {
+        healthBar.ConfigureHealth(lifePoints, lifePoints);
+    }
+
     public static string getEnemyTag()
     {
         return $"{DamageableObjectTypes.Enemy}";
@@ -37,6 +43,10 @@ public class DamageableObject : MonoBehaviour
     public void TakeDamage(int damage)
     {
         this.lifePoints -= damage;
+        if (healthBar != null)
+        {
+            healthBar.SetCurrentHealth(lifePoints);
+        }
         IsItAlive();
     }
 
