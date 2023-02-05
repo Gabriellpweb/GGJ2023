@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class WinLoseController : MonoBehaviour
+public class WinLoseController : SingletonBehaviour<WinLoseController>
 {
     [SerializeField] int flag;
     [SerializeField] GameObject win;
     [SerializeField] GameObject lose;
 
-    void Awake()
+    void Start()
     {
         win.SetActive(false);
         lose.SetActive(false);

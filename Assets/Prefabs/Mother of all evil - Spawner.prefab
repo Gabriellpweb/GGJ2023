@@ -112,6 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LastSpawn: 0
-  spawnRate: 50
+  spawnRate: 30
   EnemyPreFreb: {fileID: 1995877957326327930, guid: 4b3c953a94124654bbb31fff2dbb9220,
     type: 3}
