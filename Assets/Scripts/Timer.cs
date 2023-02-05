@@ -17,7 +17,6 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timeText;
     public float currencyTimeInterval = 10;
     private int[] secsWithDiffColor;
-    private int coins = 0;
     private float lastTimeCurrencyGained = 0;
     public float minute;
 
@@ -79,10 +78,5 @@ public class Timer : MonoBehaviour
 
         minute = minutes;
 
-    }
-
-    public int GetCoinsPerTime()
-    {
-        return bonusCoinsPerTime;
     }
 }

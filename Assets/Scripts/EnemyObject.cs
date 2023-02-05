@@ -98,14 +98,14 @@ public class EnemyObject : DamageableObject
 
     void OnDestroy()
     {
-        //wallet.AddCoin(enemyDefaultReward);
+        wallet.AddCoin(enemyDefaultReward);
     }
 
     private void Start()
     {
         base.Start();
         FindClosestPlayer();
-        //wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
+        wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }
 
     protected void Attack()
@@ -113,11 +113,9 @@ public class EnemyObject : DamageableObject
 
         if (target == null)
         { //there is no target, nothing to do here
-            //Debug.Log("Attack method target NULL");
             return;
         }
 
-        //Debug.Log($"Attacked HP {Time.time - lastAttackTime > attackRate}");
         
         float targetDistance = Vector3.Distance(transform.position, target.transform.position);
         if (targetDistance <= navMeshAgent.stoppingDistance)
@@ -130,7 +128,6 @@ public class EnemyObject : DamageableObject
                 {
                     lastAttackTime = Time.time;
                     damageableComp.TakeDamage(attackPower);
-                    //Debug.Log($"Attacked HP {damageableComp.lifePoints}");
                     animator.SetTrigger(ATACK_ANIM_PARAM);
                 }
             }
