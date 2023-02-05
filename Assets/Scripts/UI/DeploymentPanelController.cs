@@ -28,7 +28,7 @@ public class DeploymentPanelController : MonoBehaviour
             // Mount deployableItem
             DeployableItem newDeployableItem = Instantiate(deployableItemPf);
             newDeployableItem.thumb.sprite = deployableSO.objectIcon;
-            newDeployableItem.textMesh.text = deployableSO.deployableLabel;
+            newDeployableItem.textMesh.text = $"{deployableSO.deployableLabel} {deployableSO.cost}";
             newDeployableItem.button.onClick.AddListener(delegate { DeployUnit(deployableSO); });
 
             // Attach to parent and include reference to list
