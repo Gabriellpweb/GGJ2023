@@ -103,6 +103,7 @@ public class EnemyObject : DamageableObject
 
     private void Start()
     {
+        base.Start();
         FindClosestPlayer();
         //wallet = GameObject.Find("COIN_COUNTER").GetComponent<Wallet>();
     }

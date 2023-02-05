@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Image healthImage;
+    [SerializeField] private float maxHeath;
+    [SerializeField] private float currentHealth;
+
+    public void SetCurrentHealth(int amount)
     {
-        
+        currentHealth = amount;
+        Refresh();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ConfigureHealth(float maxHp, float currentHp)
     {
-        
+        maxHeath = maxHp;
+        currentHealth = currentHp;
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        if (currentHealth > 0)
+        {
+            float fill = currentHealth / maxHeath;
+            healthImage.fillAmount = fill;
+            return;
+        }
+        healthImage.fillAmount = 0;
     }
 }
